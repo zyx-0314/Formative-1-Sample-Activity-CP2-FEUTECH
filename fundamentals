@@ -1,0 +1,77 @@
+/*
+The program will prompt the user to choose the operation choice (from 1 to 5). Then it asks the
+user to input two integer values for the calculation
+*/
+
+#include <iostream>
+#include <cctype>
+
+using namespace std;
+
+
+int main() {
+    int choice, val1, val2, result;
+    string mathEquationName, loopChoice;
+    
+    do {
+        do {
+            cout
+                << "--- Main Menu ---\n" 
+                << "1. Add\n"
+                << "2. Subtraction\n"
+                << "3. Multiplication\n"
+                << "4. Division\n"
+                << "5. Modulus\n"
+                << "0. Exit\n"
+                << "\n"
+                << ">> ";
+            cin >> choice;
+            
+            system("cls");
+        } while (choice < 0 || choice > 5);
+        
+        if (choice == 0) break;
+        
+        cout << "Input value 1:";
+        cin >> val1;
+        cout << "Input value 2:";
+        cin >> val2;
+        
+        switch(choice) {
+        case 1:
+            mathEquationName = "Addition";
+            result = val1 + val2;
+            break;
+        case 2:
+            mathEquationName = "Subtraction";
+            result = val1 - val2;
+            break;
+        case 3:
+            mathEquationName = "Multiplication";
+            result = val1 * val2;
+            break;
+        case 4:
+            if (val2 == 0) {
+                cout << "Condition is not valid!";
+                return 0;
+            } else {
+                mathEquationName = "Division";
+                result = val1 / val2;
+            }
+            break;
+        case 5:
+            mathEquationName = "Modulo";
+            result = val1 % val2;
+            break;
+        }
+        
+        cout << mathEquationName << " of " << val1 << " and " << val2 << " is equal to " << result << "\n\n"
+            << "Do you want to do another go: [Y/N]\n"
+            << ">> ";
+        cin >> loopChoice;
+    } while(tolower(loopChoice[0] == 'y') );
+
+    system("cls");
+    cout << "Thank you for using the system!";
+    
+}
