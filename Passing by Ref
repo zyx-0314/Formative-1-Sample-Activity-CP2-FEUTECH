@@ -1,0 +1,110 @@
+/*
+The program will prompt the user to choose the operation choice (from 1 to 5). Then it asks the
+user to input two integer values for the calculation
+*/
+
+// 4 Fundamentals
+// Function -> Passing by Ref
+// struct
+// array
+
+#include <iostream>
+#include <cctype>
+
+using namespace std;
+
+struct ControlValues {
+    int result, val1, val2;
+    string mathEquationName;
+    
+    void Result()
+    {
+        cout << this->mathEquationName << " of " << this->val1 << " and " << this->val2 << " is equal to " << this->result << "\n\n";
+    }
+};
+
+void MainMenu(int&);
+void Input(int, int&);
+void InputState(ControlValues&);
+
+int main() {
+    ControlValues variables;
+    int choice;
+    string loopChoice;
+    
+    do {
+        do {
+            MainMenu(choice);
+        } while (choice < 0 || choice > 5);
+        
+        if (choice == 0) break;
+        
+        InputState(variables);
+        
+        switch(choice) {
+        case 1:
+            variables.mathEquationName = "Addition";
+            variables.result = variables.val1 + variables.val2;
+            break;
+        case 2:
+            variables.mathEquationName = "Subtraction";
+            variables.result = variables.val1 - variables.val2;
+            break;
+        case 3:
+            variables.mathEquationName = "Multiplication";
+            variables.result = variables.val1 * variables.val2;
+            break;
+        case 4:
+            while (variables.val2 == 0) {
+                cout << "Condition is not valid!";
+                system("pause");
+                system("cls");
+                
+                InputState(variables);
+            }
+
+            variables.mathEquationName = "Division";
+            variables.result = variables.val1 / variables.val2;
+            break;
+        case 5:
+            variables.mathEquationName = "Modulo";
+            variables.result = variables.val1 % variables.val2;
+            break;
+        }
+        
+        variables.Result();
+        cout 
+            << "Do you want to do another go: [Y/N]\n"
+            << ">> ";
+        cin >> loopChoice;
+    } while(tolower(loopChoice[0] == 'y') );
+
+    system("cls");
+    cout << "Thank you for using the system!";
+    
+}
+
+void MainMenu (int & choice){
+    
+    cout
+        << "--- Main Menu ---\n" 
+        << "1. Add\n"
+        << "2. Subtraction\n"
+        << "3. Multiplication\n"
+        << "4. Division\n"
+        << "5. Modulus\n"
+        << "0. Exit\n"
+        << "\n"
+        << ">> ";
+    cin >> choice;
+}
+
+void Input(int indicator, int & val){
+    cout << "Input value " << indicator + 1 << ":";
+    cin >> val;
+}
+
+void InputState(ControlValues & data) {
+    for (int i = 0; i < 2; i++)
+        i == 0 ? Input(i, data.val1) : Input(i, data.val2);
+}
